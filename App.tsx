@@ -132,9 +132,10 @@ export default function App() {
 
       setPdpResult({ ...result, goals: goalsWithIds });
       advanceStep('results');
-    } catch (err) {
-      setError("Failed to generate plan. Please ensure you have a valid API Key setup or try again.");
+    } catch (err: any) {
       console.error(err);
+      const errorMessage = err.message || "Failed to generate plan.";
+      setError(`${errorMessage} Please ensure you have a valid API Key setup in Vercel settings.`);
     } finally {
       setIsGenerating(false);
     }
